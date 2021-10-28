@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class GiaoVien
@@ -26,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class GiaoVien extends Model
+class GiaoVien extends Authenticatable
 {
 	protected $table = 'giao_vien';
 	protected $primaryKey = 'gv_id';

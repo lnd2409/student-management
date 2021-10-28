@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'giaovien' => [
+            'driver' => 'session',
+            'provider' => 'giaovien',
+        ],
+        'sinhvien' => [
+            'driver' => 'session',
+            'provider' => 'sinhvien',
+        ],
     ],
 
     /*
@@ -63,6 +71,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'giaovien' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\GiaoVien::class,
+        ],
+        'sinhvien' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\SinhVien::class,
         ],
 
         // 'users' => [

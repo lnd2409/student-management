@@ -189,7 +189,7 @@
                         <li class="footer"><a href="javascript:void(0);">View All Tasks</a></li>
                     </ul>
                 </li>
-                <li><a href="sign-in.html" class="mega-menu xs-hide" data-close="true"><i
+                <li><a href="{{route('logout')}}" class="mega-menu xs-hide" data-close="true"><i
                             class="zmdi zmdi-power"></i></a></li>
                 <li><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
                             class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>

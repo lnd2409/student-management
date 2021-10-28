@@ -28,6 +28,9 @@
     <div class="menu">
         <ul class="list">
             <li class="header">Quản lý cửa hàng</li>
+            <li><a href="widgets.html"><i class="zmdi zmdi-delicious"></i><span>Tra cứu sinh viên</span> </a></li>
+            <li><a href="widgets.html"><i class="zmdi zmdi-delicious"></i><span>Quản lý điểm</span> </a></li>
+
             <li class="active open"><a href="javascript:void(0);" class="menu-toggle"><i
                         class="zmdi zmdi-home"></i><span>Dashboard</span></a>
                 <ul class="ml-menu">
@@ -39,9 +42,6 @@
                     <li><a href="iot-dashboard.html">Iot Dashboard</a></li>
                 </ul>
             </li>
-            <li><a href="widgets.html"><i class="zmdi zmdi-delicious"></i><span>Widgets</span> </a></li>
-            <li><a href="mail-inbox.html"><i class="zmdi zmdi-email"></i><span>Inbox</span> </a></li>
-            <li><a href="blog-dashboard.html"><i class="zmdi zmdi-blogger"></i><span>Blogger</span> </a></li>
 
         </ul>
     </div>

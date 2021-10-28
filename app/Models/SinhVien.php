@@ -9,7 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Class SinhVien
  * 
@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class SinhVien extends Model
+class SinhVien extends Authenticatable
 {
 	protected $table = 'sinh_vien';
 	protected $primaryKey = 'sv_id';
@@ -41,7 +41,9 @@ class SinhVien extends Model
 		'sv_ten',
 		'sv_namsinh',
 		'sv_email',
-		'l_id'
+		'l_id',
+		'username',
+		'password'
 	];
 
 	public function lop()

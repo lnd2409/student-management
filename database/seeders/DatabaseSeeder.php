@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(HocKy::class);
         $this->call(NamHoc::class);
+        $this->call(Lop::class);
+        $this->call(SinhVien::class);
+        $this->call(GiaoVien::class);
     }
 }

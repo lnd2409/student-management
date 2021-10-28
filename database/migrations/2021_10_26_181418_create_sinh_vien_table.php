@@ -19,6 +19,8 @@ class CreateSinhVienTable extends Migration
             $table->string('sv_ten');
             $table->string('sv_namsinh');
             $table->string('sv_email');
+            $table->string('username');
+            $table->string('password');
             $table->bigInteger('l_id')->nullable()->unsigned();
             $table->foreign('l_id')->references('l_id')->on('lop');
             $table->timestamps();

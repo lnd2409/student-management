@@ -9,22 +9,23 @@
 
     <title>Quản lý sinh viên</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    {{-- <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('template/admin') }}/assets/plugins/bootstrap/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="{{ asset('template/admin') }}/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css" />
     <link rel="stylesheet" href="{{ asset('template/admin') }}/assets/plugins/morrisjs/morris.css" />
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{ asset('template/admin') }}/assets/css/main.css">
-    <link rel="stylesheet" href="{{ asset('template/admin') }}/assets/css/color_skins.css">
+    <link rel="stylesheet" href="{{ asset('template/admin') }}/assets/css/color_skins.css"> --}}
 
     {{-- <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css"> --}}
     <!-- JQuery DataTable Css -->
-    <link rel="stylesheet"
-        href="{{ asset('template/admin') }}/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    {{-- <link rel="stylesheet"
+        href="{{ asset('template/admin') }}/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css"> --}}
     <!-- Custom Css -->
     {{-- <link  rel="stylesheet" href="assets/css/main.css"> --}}
     {{-- <link rel="stylesheet" href="assets/css/color_skins.css"> --}}
+    @include('admin.template.css')
 </head>
 
 <body class="theme-orange">

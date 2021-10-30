@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property GiaoVien|null $giao_vien
  * @property Collection|SinhVien[] $sinh_viens
+ * @property ThoiKhoaBieuChiTiet $thoi_khoa_bieu_chi_tiet
  *
  * @package App\Models
  */
@@ -50,5 +51,10 @@ class MonHoc extends Model
 		return $this->belongsToMany(SinhVien::class, 'mon_hoc_sinh_vien', 'mh_id', 'sv_id')
 					->withPivot('id', 'mhsv_diem_1', 'mhsv_diem_2', 'mhsv_diem_phuc_khao_1', 'mhsv_diem_phuc_khao_2', 'mhsv_diemtong', 'mhsv_diemchu', 'pk_id')
 					->withTimestamps();
+	}
+
+	public function thoi_khoa_bieu_chi_tiet()
+	{
+		return $this->hasOne(ThoiKhoaBieuChiTiet::class, 'mh_id');
 	}
 }

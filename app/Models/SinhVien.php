@@ -9,7 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+
 /**
  * Class SinhVien
  * 
@@ -18,6 +18,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $sv_ten
  * @property string $sv_namsinh
  * @property string $sv_email
+ * @property string $username
+ * @property string $password
  * @property int|null $l_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -27,7 +29,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *
  * @package App\Models
  */
-class SinhVien extends Authenticatable
+class SinhVien extends Model
 {
 	protected $table = 'sinh_vien';
 	protected $primaryKey = 'sv_id';
@@ -36,14 +38,18 @@ class SinhVien extends Authenticatable
 		'l_id' => 'int'
 	];
 
+	protected $hidden = [
+		'password'
+	];
+
 	protected $fillable = [
 		'sv_ma',
 		'sv_ten',
 		'sv_namsinh',
 		'sv_email',
-		'l_id',
 		'username',
-		'password'
+		'password',
+		'l_id'
 	];
 
 	public function lop()

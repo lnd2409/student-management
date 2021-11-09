@@ -19,6 +19,10 @@ class CreateMonHocTable extends Migration
             $table->string('mh_ten');
             $table->bigInteger('gv_id')->nullable()->unsigned();
             $table->foreign('gv_id')->references('gv_id')->on('giao_vien');
+            $table->bigInteger('hk_id')->nullable()->unsigned();
+            $table->foreign('hk_id')->references('hk_id')->on('hoc_ky');
+            $table->bigInteger('nh_id')->nullable()->unsigned();
+            $table->foreign('nh_id')->references('nh_id')->on('nam_hoc');
             $table->timestamps();
         });
     }

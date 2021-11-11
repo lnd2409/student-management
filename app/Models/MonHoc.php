@@ -38,7 +38,9 @@ class MonHoc extends Model
 	protected $fillable = [
 		'mh_ma',
 		'mh_ten',
-		'gv_id'
+		'gv_id',
+		'hk_id',
+		'nh_id',
 	];
 
 	public function giao_vien()
@@ -56,5 +58,25 @@ class MonHoc extends Model
 	public function thoi_khoa_bieu_chi_tiet()
 	{
 		return $this->hasOne(ThoiKhoaBieuChiTiet::class, 'mh_id');
+	}
+
+	/**
+	 * Get the hocky that owns the MonHoc
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function hocky()
+	{
+		return $this->belongsTo(HocKy::class, 'hk_id');
+	}
+
+	/**
+	 * Get the hocky that owns the MonHoc
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function namhoc()
+	{
+		return $this->belongsTo(NamHoc::class, 'nh_id');
 	}
 }

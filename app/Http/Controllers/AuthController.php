@@ -12,11 +12,8 @@ class AuthController extends Controller
         $arrLogin = [
             'username' => $request->username,
             'password' => $request->password];
-        if (Auth::guard('giaovien')->attempt($arrLogin)) {
-            return redirect()->route('admin.index');
-
-        }else if(Auth::guard('sinhvien')->attempt($arrLogin)) {
-            return redirect()->route('admin.index');
+        if (Auth::guard('giaovien')->attempt($arrLogin)||Auth::guard('sinhvien')->attempt($arrLogin)) {
+            return redirect()->route('info');
         }else{
             toastr()->error('Không đúng tài khoản hoặc mật khẩu');
             return redirect()->back();

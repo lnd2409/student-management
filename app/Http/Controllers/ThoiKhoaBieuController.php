@@ -49,7 +49,7 @@ class ThoiKhoaBieuController extends Controller
         }
     }
 
-    public function addSubject($idSchedule) {
+    public function addSchedule($idSchedule) {
         $schedule = ThoiKhoaBieu::find($idSchedule);
         $detailSchedult = ThoiKhoaBieuChiTiet::where('tkb_id',$idSchedule)->get();
         $subject = MonHoc::all();

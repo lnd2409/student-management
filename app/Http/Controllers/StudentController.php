@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SinhVien;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -14,4 +15,13 @@ class StudentController extends Controller
 
         return view('admin.search.student_info',compact('sinhVien','request'));
     }
+
+    public function info()
+    {
+        $info='';
+        Auth::guard('sinhvien')->check()?$info=Auth::guard('sinhvien')->user():$info=Auth::guard('giaovien')->user();
+        return view('admin.index',compact('info'));
+    }
+
+    
 }

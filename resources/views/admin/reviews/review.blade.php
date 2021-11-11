@@ -28,84 +28,70 @@
 <div class="container-fluid">
     <div class=" clearfix white">
         <!-- sv -->
-        @if(Auth::guard('sinhvien')->check())
         <div class="body table-responsive">
             <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mã môn</th>
+                        <th>Tên môn</th>
+                        <th>Điểm giữa kỳ</th>
+                        <th>Điểm cuối kỳ</th>
+                        <th>Tên giáo viên</th>
+                        <th>Email giáo viên</th>
+                        <th>Phúc khảo</th>
+                    </tr>
+                </thead>
                 <tbody>
+                    @foreach($monhoc as $key=>$item)
                     <tr>
-                        <td style="width:10%">MSSV:</td>
-                        <td>{{$info->sv_ma}}</td>
+                        <td>{{$key+1}}</td>
+                        <td>{{$item->mh_ma}}</td>
+                        <td>{{$item->mh_ten}}</td>
+                        <td>{{$item->mhsv_diem_1??0}}</td>
+                        <td>{{$item->mhsv_diem_2??0}}</td>
+                        <td>{{$item->giao_vien->gv_ten??''}}</td>
+                        <td>{{$item->giao_vien->gv_email??''}}</td>
+                        <!-- Button trigger modal -->
+                        <td><button type="button" class="btn btn-warning" data-toggle="modal"
+                                data-target="#exampleModal{{$item->mh_id}}">Phúc khảo</button></td>
+
                     </tr>
-                    <tr>
-                        <td style="width:10%">Họ tên:</td>
-                        <td>{{$info->sv_ten}}</td>
-                    </tr>
-                    <tr>
-                        <td>Năm sinh:</td>
-                        <td>{{$info->sv_namsinh}}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>{{$info->sv_email}}</td>
-                    </tr>
-                    <tr>
-                        <td>Lớp:</td>
-                        <td>{{$info->lop->l_ma}}</td>
-                    </tr>
+                    <!-- Button trigger modal -->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{$item->mh_id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Phúc khảo</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{{route('review.store',$item)}}" method="post">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="">
+                                            <label for="my-input">Lý do phúc khảo</label>
+                                            <input id="my-input" class="form-control" type="text" name="pk_noidung">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Huỷ</button>
+                                        <button type="button" class="btn btn-primary">Gửi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
-        <!-- <div class="col-md-3">
-            MSSV
-        </div>
-        <div class="col-md-9">
-            {{$info->sv_ma}}
-        </div>
-        <div class="col-md-3">
-            Họ tên
-        </div>
-        <div class="col-md-9">
-            {{$info->sv_ten}}
-        </div>
-        <div class="col-md-3">
-            Năm sinh
-        </div>
-        <div class="col-md-9">
-            {{$info->sv_namsinh}}
-        </div>
-        <div class="col-md-3">
-            Email
-        </div>
-        <div class="col-md-9">
-            {{$info->sv_email}}
-        </div>
-        <div class="col-md-3">
-            Lớp
-        </div>
-        <div class="col-md-9">
-            {{$info->lop->l_ma}}
-        </div> -->
-        <!-- gv -->
-        @else
-        <div class="body table-responsive">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td style="width:10%">Họ tên:</td>
-                        <td>{{$info->gv_ten}}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>{{$info->gv_email}}</td>
-                    </tr>
-                    <tr>
-                        <td>Số điện thoại:</td>
-                        <td>{{$info->gv_sdt}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        @endif
     </div>
 </div>
 <!-- <div class="container-fluid">

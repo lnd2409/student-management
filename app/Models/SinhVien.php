@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
 /**
  * Class SinhVien
@@ -29,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class SinhVien extends Model
+class SinhVien extends User
 {
 	protected $table = 'sinh_vien';
 	protected $primaryKey = 'sv_id';
@@ -62,5 +63,14 @@ class SinhVien extends Model
 		return $this->belongsToMany(MonHoc::class, 'mon_hoc_sinh_vien', 'sv_id', 'mh_id')
 					->withPivot('id', 'mhsv_diem_1', 'mhsv_diem_2', 'mhsv_diem_phuc_khao_1', 'mhsv_diem_phuc_khao_2', 'mhsv_diemtong', 'mhsv_diemchu', 'pk_id')
 					->withTimestamps();
+	}
+	/**
+	 * Get all of the mon for the SinhVien
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function monhocsinhvien()
+	{
+		return $this->hasMany(MonHocSinhVien::class, 'sv_id' );
 	}
 }

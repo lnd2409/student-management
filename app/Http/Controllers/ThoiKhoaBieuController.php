@@ -11,9 +11,6 @@ use Carbon\Carbon;
 class ThoiKhoaBieuController extends Controller
 {
     public function add() {
-        // $now = Carbon::now();
-        // $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
-        // dd($weekStartDate);
         return view('admin.schedule.add-schedule');
     }
 

@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        <a href="{{ route('admin.subject.add') }}" class="btn btn-raised btn-primary waves-effect">Thêm môn học</a>
+                        <a href="{{ route('admin.subject.add', ['id' => 'add']) }}" class="btn btn-raised btn-primary waves-effect">Thêm môn học</a>
                     </h2>
                 </div>
                 <div class="body">
@@ -29,19 +29,24 @@
                                 <th>#</th>
                                 <th>Mã môn học</th>
                                 <th>Tên môn học</th>
+                                <th>Năm học</th>
+                                <th>Học kỳ</th>
+                                <th>Gíao viên giảng dạy</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($monHoc as $key => $value)
                             <tr>
-                                <td>{{ $key }}</td>
+                                <td>{{ $key+1 }}</td>
                                 <td>{{ $value->mh_ma }}</td>
                                 <td>{{ $value->mh_ten }}</td>
-                                <td>{{ $value->gv_id }}</td>
+                                <td>{{ $value->namhoc->nh_ten }}</td>
+                                <td>{{ $value->hocky->hk_ten }}</td>
+                                <td>{{ $value->giao_vien->gv_ten }}</td>
                                 <td>
-                                    <button type="button" class="btn  btn-raised btn-warning waves-effect">Sửa</button>
-                                    <button type="button" class="btn  btn-raised btn-danger waves-effect">Xóa</button>
+                                    <a href="{{ route('admin.subject.add', ['id'=>$value->mh_id]) }}" class="btn btn-raised btn-warning waves-effect">Sửa</a>
+                                    {{-- <button type="button" class="btn btn-raised btn-danger waves-effect">Xóa</button> --}}
                                 </td>
                             </tr>
                             @endforeach

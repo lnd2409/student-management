@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MonHoc
- * 
+ *
  * @property int $mh_id
  * @property string $mh_ma
  * @property string $mh_ten
  * @property int|null $gv_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property GiaoVien|null $giao_vien
  * @property Collection|SinhVien[] $sinh_viens
  * @property ThoiKhoaBieuChiTiet $thoi_khoa_bieu_chi_tiet

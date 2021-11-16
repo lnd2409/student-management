@@ -19,9 +19,17 @@ class StudentController extends Controller
     public function info()
     {
         $info='';
-        Auth::guard('sinhvien')->check()?$info=Auth::guard('sinhvien')->user():$info=Auth::guard('giaovien')->user();
+        if (Auth::guard('sinhvien')->check()) {
+            # code...
+            $info=Auth::guard('sinhvien')->user();
+        } else if(Auth::guard('giaovien')->check()) {
+            # code...
+            $info=Auth::guard('giaovien')->user();
+        }else {
+            $info=Auth::guard('quantri')->user();
+        }
         return view('admin.index',compact('info'));
     }
 
-    
+
 }

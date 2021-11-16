@@ -13,7 +13,7 @@ class CreateMonHocQuanTriTable extends Migration
      */
     public function up()
     {
-        Schema::create('mon_hoc_quan_tri', function (Blueprint $table) {
+        Schema::create('quan_tri', function (Blueprint $table) {
             $table->id('qt_id');
             $table->string('qt_ten');
             $table->string('username');
@@ -29,6 +29,6 @@ class CreateMonHocQuanTriTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mon_hoc_quan_tri');
+        Schema::dropIfExists('quan_tri');
     }
 }

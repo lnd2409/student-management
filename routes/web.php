@@ -18,12 +18,7 @@ use App\Http\Controllers\ThoiKhoaBieuController;
 |
 */
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/mon-hoc', [MonHocController::class,'index'])->name('subject.index');
-    Route::get('/them-mon-hoc/{id}', [MonHocController::class,'add'])->name('subject.add');
-    Route::post('/xu-ly-them-mon-hoc', [MonHocController::class,'handleCRUD'])->name('subject.store');
-    Route::post('/xu-ly-them-thoi-khoa-bieu', [ThoiKhoaBieuController::class,'createShedule'])->name('handle.schedule.add');
-});
+
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
     Route::post('/sign-in', [AuthController::class,'handleLogin'])->name('handleLogin');
 Route::get('/sign-in', function () {
@@ -35,6 +30,12 @@ Route::get('/sign-up', function () {
 
 Route::get('/', function () {return redirect()->route('info');});
 Route::middleware(['checkAuth'])->group(function () {//route đăng nhập
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/mon-hoc', [MonHocController::class,'index'])->name('subject.index');
+        Route::get('/them-mon-hoc/{id}', [MonHocController::class,'add'])->name('subject.add');
+        Route::post('/xu-ly-them-mon-hoc', [MonHocController::class,'handleCRUD'])->name('subject.store');
+        Route::post('/xu-ly-them-thoi-khoa-bieu', [ThoiKhoaBieuController::class,'createShedule'])->name('handle.schedule.add');
+    });
 Route::group(['middleware' => 'checkRole:sinhvien'], function () {//route sinh viên
 
     Route::get('/phuc-khao', [ReviewController::class,'review'])->name('review');
@@ -45,11 +46,14 @@ Route::group(['middleware' => 'checkRole:sinhvien'], function () {//route sinh v
 });
 Route::group(['middleware' => 'checkRole:giaovien'], function () {//route giáo viên
     Route::get('/thong-ke', [TeacherController::class,'stat'])->name('stat');
-
+    Route::get('/mon-hoc-hien/{id}', [MonHocController::class,'subjectByTeacher'])->name('subject.by.teacher');
 });
 Route::get('/thong-tin', [StudentController::class,'info'])->name('info');
 Route::get('/', function () {return redirect()->route('info');});
-
+Route::get('/dang-ky-mon', [MonHocController::class,'registerSubject'])->name('dang-ky-mon-hoc');
+Route::get('/xu-ly-dang-ky-mon/{idMonHoc}', [MonHocController::class,'handleRegister'])->name('xu-ly-dang-ky-mon-hoc');
+Route::get('/danh-sach-sinh-vien-dang-hoc/{idMonHoc}', [MonHocController::class,'getStudentBySubject'])->name('mon-hoc.danh-sach-sinh-vien');
+Route::get('/nhap-diem/{idSinhVien}/{idMonHoc}', [MonHocController::class,'handleScore'])->name('mon-hoc.nhap-diem');
 Route::get('/db', function () {
     $data = [
         [
@@ -80,4 +84,5 @@ Route::get('/db', function () {
 
     DB::table('mon_hoc_sinh_vien')->insert($data);
 });
+
 });

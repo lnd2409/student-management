@@ -27,13 +27,21 @@
     <!-- Menu -->
     <div class="menu">
         <ul class="list">
+            @if (Auth::guard('quantri')->check())
+            <li><a href="{{route('admin.subject.index')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý môn học</span> </a>
+            </li>
+
+            @endif
             <li><a href="{{route('review')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý điểm</span> </a>
             </li>
             @if(Auth::guard('sinhvien')->check())
 
             <li><a href="{{route('review')}}"><i class="zmdi zmdi-delicious"></i><span>Phúc khảo</span> </a></li>
+            <li><a href="{{route('dang-ky-mon-hoc')}}"><i class="zmdi zmdi-delicious"></i><span>Đăng ký môn học</span> </a>
+            </li>
             @endif
             @if(Auth::guard('giaovien')->check())
+            <li><a href="{{ route('subject.by.teacher', ['id'=>Auth::guard('giaovien')->id()]) }}"><i class="zmdi zmdi-delicious"></i><span>Danh sách môn học</span> </a></li>
             <li><a href="{{route('stat')}}"><i class="zmdi zmdi-delicious"></i><span>Thống kê</span> </a></li>
             @endif
 

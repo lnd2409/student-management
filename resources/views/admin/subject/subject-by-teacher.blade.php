@@ -18,9 +18,6 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="header">
-                    <h2>
-                        <a href="{{ route('admin.subject.add', ['id' => 'add']) }}" class="btn btn-raised btn-primary waves-effect">Thêm môn học</a>
-                    </h2>
                 </div>
                 <div class="body">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
@@ -48,8 +45,7 @@
                                     <td>{{ count($value->sinh_viens) }}</td>
                                     <td>{{ $value->giao_vien->gv_ten }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-raised btn-info waves-effect">Sắp xếp sinh viên</a>
-                                        <a href="{{ route('admin.subject.add', ['id'=>$value->mh_id]) }}" class="btn btn-raised btn-warning waves-effect">Sửa</a>
+                                        <a href="{{ route('mon-hoc.danh-sach-sinh-vien', ['idMonHoc'=>$value->mh_id]) }}" class="btn btn-raised btn-info waves-effect">Nhập điểm</a>
                                     </td>
                                 </tr>
                                 @endforeach

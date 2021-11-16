@@ -14,8 +14,11 @@
 <div class="block-header">
     <div class="row">
         <div class="col-lg-7 col-md-6 col-sm-12">
-            <h2>Thông tin cá nhân
-            </h2>
+            @if (Auth::guard('quantri')->check())
+                <h2>Thông tin quản trị viên</h2>
+            @else
+                <h2>Thông tin cá nhân</h2>
+            @endif
         </div>
         <div class="col-lg-5 col-md-6 col-sm-12">
             <ul class="breadcrumb float-md-right">
@@ -86,7 +89,7 @@
             {{$info->lop->l_ma}}
         </div> -->
         <!-- gv -->
-        @else
+        @elseif (Auth::guard('giaovien')->check())
         <div class="body table-responsive">
             <table class="table">
                 <tbody>
@@ -105,6 +108,17 @@
                 </tbody>
             </table>
         </div>
+        @else
+            <div class="body table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td style="width:10%">Xin chào,</td>
+                            <td>{{$info->qt_ten}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         @endif
     </div>
 </div>

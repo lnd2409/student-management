@@ -12,7 +12,10 @@ class AuthController extends Controller
         $arrLogin = [
             'username' => $request->username,
             'password' => $request->password];
-        if (Auth::guard('giaovien')->attempt($arrLogin)||Auth::guard('sinhvien')->attempt($arrLogin)) {
+        // dd(Auth::guard('quantri')->attempt($arrLogin));
+        if (Auth::guard('giaovien')->attempt($arrLogin)||Auth::guard('sinhvien')->attempt($arrLogin)
+            || Auth::guard('quantri')->attempt($arrLogin)
+            ) {
             return redirect()->route('info');
         }else{
             toastr()->error('Không đúng tài khoản hoặc mật khẩu');
@@ -24,6 +27,7 @@ class AuthController extends Controller
     public function logout() {
         Auth::guard('sinhvien')->logout();
         Auth::guard('giaovien')->logout();
+        Auth::guard('quantri')->logout();
         return redirect()->route('signIn');
     }
 }

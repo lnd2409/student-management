@@ -1,27 +1,22 @@
 @extends('admin.template.master')
 @section('content')
-<div class="block-header">
-    <div class="row">
-        <div class="col-lg-7 col-md-6 col-sm-12">
-            <h2>Danh sách môn học</h2>
-        </div>
-        <div class="col-lg-5 col-md-6 col-sm-12">
-            <ul class="breadcrumb float-md-right">
-                <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
-                <li class="breadcrumb-item active">Môn học</li>
-            </ul>
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Thêm môn học</h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="#">Môn học</a></li>
+                    <li class="breadcrumb-item active">Tạo danh sách sinh viên</li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
-<div class="container-fluid">
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
-                <div class="header">
-                    <h2>
-                        <a href="{{ route('admin.subject.add', ['id' => 'add']) }}" class="btn btn-raised btn-primary waves-effect">Thêm môn học</a>
-                    </h2>
-                </div>
                 <div class="body">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
@@ -33,6 +28,7 @@
                                 <th>Học kỳ</th>
                                 <th>Số lượng sinh viên</th>
                                 <th>Gíao viên giảng dạy</th>
+                                <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -48,8 +44,20 @@
                                     <td>{{ count($value->sinh_viens) }}</td>
                                     <td>{{ $value->giao_vien->gv_ten }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-raised btn-info waves-effect">Sắp xếp sinh viên</a>
-                                        <a href="{{ route('admin.subject.add', ['id'=>$value->mh_id]) }}" class="btn btn-raised btn-warning waves-effect">Sửa</a>
+                                        @if ($value->checkStudent($sinhVien->sv_id,$value->mh_id) == 1)
+                                            <p style="color: green">Đã đăng ký</p>
+                                        @else
+                                            <p style="color: red">Chưa đăng ký</p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (count($value->sinh_viens) >= 45)
+                                            <a href="#" class="btn btn-raised btn-warning waves-effect">Đã đủ sinh viên</a>
+                                        @elseif ($value->checkStudent($sinhVien->sv_id,$value->mh_id) == 1)
+                                            <a href="#" class="btn btn-raised btn-warning waves-effect" disable>Đã đăng ký</a>
+                                        @else
+                                            <a href="{{ route('xu-ly-dang-ky-mon-hoc', ['idMonHoc'=>$value->mh_id]) }}" class="btn btn-raised btn-info waves-effect">Đăng ký</a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -60,5 +68,7 @@
             </div>
         </div>
     </div>
-</div>
+    {{-- @push('ajax.product')
+
+    @endpush --}}
 @endsection

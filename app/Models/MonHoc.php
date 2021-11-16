@@ -9,7 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 /**
  * Class MonHoc
  *
@@ -79,4 +79,13 @@ class MonHoc extends Model
 	{
 		return $this->belongsTo(NamHoc::class, 'nh_id');
 	}
+
+    public function checkStudent($idStudent, $idMonHoc) {
+        $data = DB::table('mon_hoc_sinh_vien')->where('sv_id', $idStudent)->where('mh_id', $idMonHoc)->get();
+        if(count($data) > 0) {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 }

@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'sinhvien',
         ],
+        'quantri' => [
+            'driver' => 'session',
+            'provider' => 'quantri',
+        ],
     ],
 
     /*
@@ -80,7 +84,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\SinhVien::class,
         ],
-
+        'quantri' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\QuanTri::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

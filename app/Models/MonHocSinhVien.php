@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MonHocSinhVien
- * 
+ *
  * @property int $id
  * @property int $mhsv_diem_1
  * @property int $mhsv_diem_2
@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $mh_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property MonHoc|null $mon_hoc
  * @property PhucKhao|null $phuc_khao
  * @property SinhVien|null $sinh_vien

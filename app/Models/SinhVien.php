@@ -13,7 +13,7 @@ use Illuminate\Foundation\Auth\User;
 
 /**
  * Class SinhVien
- * 
+ *
  * @property int $sv_id
  * @property string $sv_ma
  * @property string $sv_ten
@@ -24,7 +24,7 @@ use Illuminate\Foundation\Auth\User;
  * @property int|null $l_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Lop|null $lop
  * @property Collection|MonHoc[] $mon_hocs
  *

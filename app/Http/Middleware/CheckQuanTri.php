@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CheckAuth
+class CheckQuanTri
 {
     /**
      * Handle an incoming request.
@@ -17,9 +16,6 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('sinhvien')->check() || Auth::guard('giaovien')->check() || Auth::guard('quantri')->check()){
-            return $next($request);
-        }
-        return redirect()->route('signIn');
+        return $next($request);
     }
 }

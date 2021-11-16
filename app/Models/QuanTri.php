@@ -8,10 +8,10 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Foundation\Auth\User;
 /**
  * Class MonHocQuanTri
- * 
+ *
  * @property int $qt_id
  * @property string $qt_ten
  * @property string $username
@@ -21,9 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class MonHocQuanTri extends Model
+class QuanTri extends User
 {
-	protected $table = 'mon_hoc_quan_tri';
+	protected $table = 'quan_tri';
 	protected $primaryKey = 'qt_id';
 
 	protected $hidden = [

@@ -24,7 +24,7 @@ class MonHocSinhVien extends Seeder
             ],
             [
                 'sv_id'=>3,
-                'mh_id'=>1
+                'mh_id'=>2
             ],
             [
                 'sv_id'=>1,

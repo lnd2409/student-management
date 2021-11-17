@@ -19,11 +19,13 @@ class NamHoc extends Seeder
             ]
         ];
         for ($i=21; $i <= 80 ; $i++) {
-            # code...
             DB::table('nam_hoc')->insert([
                 'nh_ten' => '20'.$i
             ]);
         }
+        DB::table('nam_hoc')->where('nh_id',1)->update([
+            'nh_trangthai' => 1
+        ]);
 
     }
 }

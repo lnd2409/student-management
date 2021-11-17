@@ -16,6 +16,7 @@ class CreateNamHocTable extends Migration
         Schema::create('nam_hoc', function (Blueprint $table) {
             $table->id('nh_id');
             $table->string('nh_ten');
+            $table->integer('nh_trangthai')->default(0);
             $table->timestamps();
         });
     }

@@ -139,47 +139,82 @@ class MonHocController extends Controller
     {
         $diemtong=0;
         $tinchi=0;
-        $xeploai=0;
-        $mhsv=MonHocSinhVien::whereHas('mon_hoc', function ($q) use ($sv_id,$hk_id,$nh_id) {
+        $float_xeploai=0;
+        $mhsv=MonHocSinhVien::with('mon_hoc')->whereHas('mon_hoc', function ($q) use ($sv_id,$hk_id,$nh_id) {
             $q->where('sv_id', $sv_id)
             ->where('hk_id',$hk_id)
             ->where('nh_id',$nh_id);
         })->get();
 
         foreach ($mhsv as $key => $value) {
-            $diemtong+=$value->mhsv_diemtong*$value->mh_tinchi;
-            $tinchi+=$value->mh_tinchi;
+            switch ($value->mhsv_diemchu) {
+                case 'A':
+                    $diemtong+=4*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'B+':
+                    $diemtong+=3.5*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'B':
+                    $diemtong+=3*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'C+':
+                    $diemtong+=2.5*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'C':
+                    $diemtong+=2*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'D+':
+                    $diemtong+=1.5*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case'D':
+                    $diemtong+=1*$value->mon_hoc->mh_tinchi;
+                    break;
+            }
+            $tinchi+=$value->mon_hoc->mh_tinchi;
         }
-        $tinchi!=0&&$xeploai=$diemtong/$tinchi;
-        if($xeploai>=1 && $xeploai<=1.99) {
-            $string_xeploai='Kém';
+        $tinchi!=0&&$float_xeploai=$diemtong/$tinchi;
+        if($float_xeploai>=1 && $float_xeploai<=1.99) {
+            $string_xeploai='Yếu';
 
-        }else if($xeploai>=2 && $xeploai<=2.49) {
-            $string_xeploai='Kém';
+        }else if($float_xeploai>=2 && $float_xeploai<=2.49) {
+            $string_xeploai='Trung bình';
 
-        }else if($xeploai>=2.5 && $xeploai<=3.19) {
-            $string_xeploai='Kém';
+        }else if($float_xeploai>=2.5 && $float_xeploai<=3.19) {
+            $string_xeploai='Khá';
 
-        }else if($xeploai>=3.2 && $xeploai<=3.59) {
-            $string_xeploai='Kém';
+        }else if($float_xeploai>=3.2 && $float_xeploai<=3.59) {
+            $string_xeploai='Giỏi';
 
-        }else if($xeploai>=3.6 && $xeploai<=4) {
-            $string_xeploai='Kém';
+        }else if($float_xeploai>=3.6 && $float_xeploai<=4) {
+            $string_xeploai='Xuất sắc';
 
         }else{
             $string_xeploai='Kém';
 
         }
-        
+        $check=XepLoai::where('sv_id',$sv_id)
+		->where('hk_id',$hk_id)
+		->where('nh_id',$nh_id)->first();
+        $check?
         XepLoai::where('sv_id',$sv_id)
 		->where('hk_id',$hk_id)
 		->where('nh_id',$nh_id)
-		->updateOrCreate(['xl_xeploai'=>$string_xeploai,
+		->update(['xl_xeploai'=>$string_xeploai,
+        'xl_gpa'=>$float_xeploai,
+        'sv_id'=>$sv_id,
+		'hk_id'=>$hk_id,
+		'nh_id'=>$nh_id
+        ])
+        :
+        XepLoai::where('sv_id',$sv_id)
+		->where('hk_id',$hk_id)
+		->where('nh_id',$nh_id)
+		->create(['xl_xeploai'=>$string_xeploai,
+        'xl_gpa'=>$float_xeploai,
         'sv_id'=>$sv_id,
 		'hk_id'=>$hk_id,
 		'nh_id'=>$nh_id
         ]);
-
 
     }
 }

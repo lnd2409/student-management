@@ -16,6 +16,7 @@ class CreateXepLoaiTable extends Migration
         Schema::create('xep_loai', function (Blueprint $table) {
             $table->id('xl_id');
             $table->string('xl_xeploai')->default('Chưa có');
+            $table->float('xl_gpa')->default(0)->unsigned();
             $table->bigInteger('sv_id')->nullable()->unsigned();
             $table->foreign('sv_id')->references('sv_id')->on('sinh_vien');
             $table->bigInteger('hk_id')->nullable()->unsigned();

@@ -73,6 +73,7 @@
                                 <th>Lớp</th>
                                 <th>Môn học</th>
                                 <th>Điểm trung bình</th>
+                                <th>GPA</th>
                                 <th>Xếp loại</th>
                                 <th>Học kỳ</th>
                             </tr>
@@ -88,6 +89,7 @@
                                 <td>{{$item->sinh_vien->lop->l_ma}}</td>
                                 <td>{{$item->mon_hoc->mh_ten}}</td>
                                 <td>{{$item->mhsv_diemtong}}</td>
+                                <td>{{$item->sinh_vien->xep_loai_hien_tai($item->mon_hoc->namhoc->nh_id,$item->mon_hoc->hocky->hk_id)->xl_gpa??'0'}}</td>
                                 <td>{{$item->sinh_vien->xep_loai_hien_tai($item->mon_hoc->namhoc->nh_id,$item->mon_hoc->hocky->hk_id)->xl_xeploai??'Chưa có'}}</td>
                                 <td>{{$item->mon_hoc->namhoc->nh_ten??''}} - {{$item->mon_hoc->hocky->hk_ten??''}}</td>
                             </tr>

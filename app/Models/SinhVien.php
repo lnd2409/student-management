@@ -84,6 +84,6 @@ class SinhVien extends User
 		return XepLoai::where('sv_id',$this->attributes['sv_id'])
 		->where('hk_id',$hk_id)
 		->where('nh_id',$nh_id)
-		->first('xl_xeploai');
+		->first();
 	}
 }

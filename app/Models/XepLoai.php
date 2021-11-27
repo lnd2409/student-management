@@ -37,6 +37,7 @@ class XepLoai extends Model
 
 	protected $fillable = [
 		'xl_xeploai',
+		'xl_gpa',
 		'sv_id',
 		'hk_id',
 		'nh_id'

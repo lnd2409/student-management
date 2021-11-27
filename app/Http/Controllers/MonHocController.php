@@ -7,7 +7,9 @@ use App\Models\MonHoc;
 use App\Models\GiaoVien;
 use App\Models\SinhVien;
 use App\Models\HocKy;
+use App\Models\MonHocSinhVien;
 use App\Models\NamHoc;
+use App\Models\XepLoai;
 use Auth;
 use DB;
 class MonHocController extends Controller
@@ -91,7 +93,6 @@ class MonHocController extends Controller
             ]
         );
         if ($request->mhsv_diemtong >= 0 && $request->mhsv_diemtong <= 3.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'F',
@@ -99,7 +100,6 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 4 && $request->mhsv_diemtong <= 4.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'D',
@@ -107,7 +107,6 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 5 && $request->mhsv_diemtong <= 6.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'C',
@@ -115,7 +114,6 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 7 && $request->mhsv_diemtong <= 8.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'B',
@@ -123,17 +121,65 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 9 && $request->mhsv_diemtong <= 10) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'A',
                 ]
             );
         }
-        DB::table('mon_hoc_sinh_vien')
-                ->where('mon_hoc_sinh_vien.mh_id',$idMonHoc)
+        MonHocSinhVien::where('mon_hoc_sinh_vien.mh_id',$idMonHoc)
                 ->where('mon_hoc_sinh_vien.sv_id',$idSinhVien)
                 ->update($request->all());
+        $monhoc=MonHoc::where('mh_id',$idMonHoc)->first();
+                $this->updateXepLoai($idSinhVien,$monhoc->nh_id,$monhoc->hk_id);
         return redirect()->back();
+    }
+
+    public function updateXepLoai($sv_id,$nh_id,$hk_id)
+    {
+        $diemtong=0;
+        $tinchi=0;
+        $xeploai=0;
+        $mhsv=MonHocSinhVien::whereHas('mon_hoc', function ($q) use ($sv_id,$hk_id,$nh_id) {
+            $q->where('sv_id', $sv_id)
+            ->where('hk_id',$hk_id)
+            ->where('nh_id',$nh_id);
+        })->get();
+
+        foreach ($mhsv as $key => $value) {
+            $diemtong+=$value->mhsv_diemtong*$value->mh_tinchi;
+            $tinchi+=$value->mh_tinchi;
+        }
+        $tinchi!=0&&$xeploai=$diemtong/$tinchi;
+        if($xeploai>=1 && $xeploai<=1.99) {
+            $string_xeploai='Kém';
+
+        }else if($xeploai>=2 && $xeploai<=2.49) {
+            $string_xeploai='Kém';
+
+        }else if($xeploai>=2.5 && $xeploai<=3.19) {
+            $string_xeploai='Kém';
+
+        }else if($xeploai>=3.2 && $xeploai<=3.59) {
+            $string_xeploai='Kém';
+
+        }else if($xeploai>=3.6 && $xeploai<=4) {
+            $string_xeploai='Kém';
+
+        }else{
+            $string_xeploai='Kém';
+
+        }
+        
+        XepLoai::where('sv_id',$sv_id)
+		->where('hk_id',$hk_id)
+		->where('nh_id',$nh_id)
+		->updateOrCreate(['xl_xeploai'=>$string_xeploai,
+        'sv_id'=>$sv_id,
+		'hk_id'=>$hk_id,
+		'nh_id'=>$nh_id
+        ]);
+
+
     }
 }

@@ -73,4 +73,17 @@ class SinhVien extends User
 	{
 		return $this->hasMany(MonHocSinhVien::class, 'sv_id' );
 	}
+
+	public function xep_loais()
+	{
+		return $this->hasMany(XepLoai::class, 'sv_id');
+	}
+
+	public function xep_loai_hien_tai($nh_id,$hk_id)
+	{
+		return XepLoai::where('sv_id',$this->attributes['sv_id'])
+		->where('hk_id',$hk_id)
+		->where('nh_id',$nh_id)
+		->first('xl_xeploai');
+	}
 }

@@ -38,6 +38,7 @@ class MonHoc extends Model
 	protected $fillable = [
 		'mh_ma',
 		'mh_ten',
+		'mh_tinchi',
 		'gv_id',
 		'hk_id',
 		'nh_id',

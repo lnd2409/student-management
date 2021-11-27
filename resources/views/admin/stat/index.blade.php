@@ -60,6 +60,7 @@
                                 <th>Lớp</th>
                                 <th>Môn học</th>
                                 <th>Điểm trung bình</th>
+                                <th>GPA</th>
                                 <th>Xếp loại</th>
                                 <th>Học kỳ</th>
                             </tr>

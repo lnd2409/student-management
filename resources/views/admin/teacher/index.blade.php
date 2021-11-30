@@ -42,7 +42,7 @@
                                     <td>{{ $value->gv_id }}</td>
                                     <td>{{ $value->gv_ten }}</td>
                                     <td>{{ $value->gv_sdt }}</td>
-                                    <td>{{ $value->sv_email }}</td>
+                                    <td>{{ $value->gv_email }}</td>
                                     <td>
                                         <a href="{{ route('admin.teacher.add', ['id' => $value->gv_id]) }}" class="btn btn-raised btn-warning waves-effect">Sửa</a>
                                     </td>

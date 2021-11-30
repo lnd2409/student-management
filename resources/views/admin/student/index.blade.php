@@ -8,7 +8,7 @@
         <div class="col-lg-5 col-md-6 col-sm-12">
             <ul class="breadcrumb float-md-right">
                 <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
-                <li class="breadcrumb-item active">Môn học</li>
+                <li class="breadcrumb-item active">Quản lý học sinh</li>
             </ul>
         </div>
     </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        <a href="{{ route('admin.subject.add', ['id' => 'add']) }}" class="btn btn-raised btn-primary waves-effect">Thêm môn học</a>
+                        <a href="{{ route('admin.student.add', ['id' => 'add']) }}" class="btn btn-raised btn-primary waves-effect">Thêm sinh viên</a>
                     </h2>
                 </div>
                 <div class="body">
@@ -27,28 +27,26 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Mã môn học</th>
-                                <th>Tên môn học</th>
-                                <th>Năm học</th>
-                                <th>Học kỳ</th>
-                                <th>Số lượng sinh viên</th>
-                                <th>Gíao viên giảng dạy</th>
+                                <th>MSSV</th>
+                                <th>Họ tên</th>
+                                <th>Năm sinh</th>
+                                <th>Email</th>
+                                <th>Lớp</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($monHoc) > 0)
-                                @foreach ($monHoc as $key => $value)
+                            @if (count($data) > 0)
+                                @foreach ($data as $key => $value)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $value->mh_ma }}</td>
-                                    <td>{{ $value->mh_ten }}</td>
-                                    <td>{{ $value->namhoc->nh_ten }}</td>
-                                    <td>{{ $value->hocky->hk_ten }}</td>
-                                    <td>{{ count($value->sinh_viens) }}</td>
-                                    <td>{{ $value->giao_vien->gv_ten }}</td>
+                                    <td>{{ $value->sv_ma }}</td>
+                                    <td>{{ $value->sv_ten }}</td>
+                                    <td>{{ $value->sv_namsinh }}</td>
+                                    <td>{{ $value->sv_email }}</td>
+                                    <td>{{ $value->lop->l_ma }}</td>
                                     <td>
-                                        <a href="{{ route('admin.subject.add', ['id'=>$value->mh_id]) }}" class="btn btn-raised btn-warning waves-effect">Sửa</a>
+                                        <a href="{{ route('admin.student.add', ['id' => $value->sv_id]) }}" class="btn btn-raised btn-warning waves-effect">Sửa</a>
                                     </td>
                                 </tr>
                                 @endforeach

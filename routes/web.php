@@ -35,7 +35,20 @@ Route::middleware(['checkAuth'])->group(function () {//route đăng nhập
         Route::get('/them-mon-hoc/{id}', [MonHocController::class,'add'])->name('subject.add');
         Route::post('/xu-ly-them-mon-hoc', [MonHocController::class,'handleCRUD'])->name('subject.store');
         Route::post('/xu-ly-them-thoi-khoa-bieu', [ThoiKhoaBieuController::class,'createShedule'])->name('handle.schedule.add');
+
+        Route::prefix('/sinh-vien')->name('student.')->group(function () {
+            Route::get('/', [StudentController::class,'index'])->name('index');
+            Route::get('/them-sinh-vien/{id}', [StudentController::class,'add'])->name('add');
+            Route::get('/xu-ly-them', [StudentController::class,'handleAdd'])->name('handle.add');
+        });
+
+        Route::prefix('/giao-vien')->name('teacher.')->group(function () {
+            Route::get('/', [TeacherController::class,'index'])->name('index');
+            Route::get('/them-giao-vien/{id}', [TeacherController::class,'add'])->name('add');
+            Route::get('/xu-ly-them', [TeacherController::class,'handleAdd'])->name('handle.add');
+        });
     });
+
 Route::group(['middleware' => 'checkRole:sinhvien'], function () {//route sinh viên
 
     Route::get('/phuc-khao', [ReviewController::class,'review'])->name('review');

@@ -20,7 +20,7 @@
                 <div class="header">
                 </div>
                 <div class="body">
-                    <table class="table table-bordered table-striped table-hover">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -37,8 +37,9 @@
                         <tbody>
                             @if (count($data) > 0)
                                 @foreach ($data as $key => $value)
-                                <form action="{{ route('mon-hoc.nhap-diem', ['idMonHoc'=>$value->mh_id, 'idSinhVien' => $value->sv_id]) }}" method="GET">
+
                                     <tr>
+                                        <form action="{{ route('mon-hoc.nhap-diem', ['idMonHoc'=>$value->mh_id, 'idSinhVien' => $value->sv_id]) }}" method="GET">
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $value->sv_ten }}</td>
                                         <td>
@@ -61,8 +62,9 @@
                                         <td>
                                             <button type="submit" class="btn btn-raised btn-info waves-effect">Xác nhận</button>
                                         </td>
+                                    </form>
                                     </tr>
-                                </form>
+
                                 @endforeach
                             @endif
                         </tbody>

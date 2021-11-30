@@ -30,7 +30,10 @@
             @if (Auth::guard('quantri')->check())
             <li><a href="{{route('admin.subject.index')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý môn học</span> </a>
             </li>
-
+            <li><a href="{{route('admin.teacher.index')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý giáo viên</span> </a>
+            </li>
+            <li><a href="{{route('admin.student.index')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý sinh viên</span> </a>
+            </li>
             @endif
             <li><a href="{{route('review')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý điểm</span> </a>
             </li>

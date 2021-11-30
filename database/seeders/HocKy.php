@@ -16,12 +16,15 @@ class HocKy extends Seeder
         $data = [
             [
                 'hk_ten' => 'Học kỳ 1',
+                'hk_trangthai' => 1
             ],
             [
                 'hk_ten' => 'Học kỳ 2',
+                'hk_trangthai' => 0
             ],
             [
                 'hk_ten' => 'Học kỳ hè',
+                'hk_trangthai' => 0
             ]
         ];
 

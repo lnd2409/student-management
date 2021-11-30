@@ -7,7 +7,9 @@ use App\Models\MonHoc;
 use App\Models\GiaoVien;
 use App\Models\SinhVien;
 use App\Models\HocKy;
+use App\Models\MonHocSinhVien;
 use App\Models\NamHoc;
+use App\Models\XepLoai;
 use Auth;
 use DB;
 class MonHocController extends Controller
@@ -91,7 +93,6 @@ class MonHocController extends Controller
             ]
         );
         if ($request->mhsv_diemtong >= 0 && $request->mhsv_diemtong <= 3.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'F',
@@ -99,7 +100,6 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 4 && $request->mhsv_diemtong <= 4.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'D',
@@ -107,7 +107,6 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 5 && $request->mhsv_diemtong <= 6.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'C',
@@ -115,7 +114,6 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 7 && $request->mhsv_diemtong <= 8.9) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'B',
@@ -123,17 +121,100 @@ class MonHocController extends Controller
             );
         }
         if ($request->mhsv_diemtong >= 9 && $request->mhsv_diemtong <= 10) {
-            # code...
             $request->merge(
                 [
                     'mhsv_diemchu' => 'A',
                 ]
             );
         }
-        DB::table('mon_hoc_sinh_vien')
-                ->where('mon_hoc_sinh_vien.mh_id',$idMonHoc)
+        MonHocSinhVien::where('mon_hoc_sinh_vien.mh_id',$idMonHoc)
                 ->where('mon_hoc_sinh_vien.sv_id',$idSinhVien)
                 ->update($request->all());
+        $monhoc=MonHoc::where('mh_id',$idMonHoc)->first();
+                $this->updateXepLoai($idSinhVien,$monhoc->nh_id,$monhoc->hk_id);
         return redirect()->back();
+    }
+
+    public function updateXepLoai($sv_id,$nh_id,$hk_id)
+    {
+        $diemtong=0;
+        $tinchi=0;
+        $float_xeploai=0;
+        $mhsv=MonHocSinhVien::with('mon_hoc')->whereHas('mon_hoc', function ($q) use ($sv_id,$hk_id,$nh_id) {
+            $q->where('sv_id', $sv_id)
+            ->where('hk_id',$hk_id)
+            ->where('nh_id',$nh_id);
+        })->get();
+
+        foreach ($mhsv as $key => $value) {
+            switch ($value->mhsv_diemchu) {
+                case 'A':
+                    $diemtong+=4*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'B+':
+                    $diemtong+=3.5*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'B':
+                    $diemtong+=3*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'C+':
+                    $diemtong+=2.5*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'C':
+                    $diemtong+=2*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case 'D+':
+                    $diemtong+=1.5*$value->mon_hoc->mh_tinchi;
+                    break;
+                    case'D':
+                    $diemtong+=1*$value->mon_hoc->mh_tinchi;
+                    break;
+            }
+            $tinchi+=$value->mon_hoc->mh_tinchi;
+        }
+        $tinchi!=0&&$float_xeploai=$diemtong/$tinchi;
+        if($float_xeploai>=1 && $float_xeploai<=1.99) {
+            $string_xeploai='Yếu';
+
+        }else if($float_xeploai>=2 && $float_xeploai<=2.49) {
+            $string_xeploai='Trung bình';
+
+        }else if($float_xeploai>=2.5 && $float_xeploai<=3.19) {
+            $string_xeploai='Khá';
+
+        }else if($float_xeploai>=3.2 && $float_xeploai<=3.59) {
+            $string_xeploai='Giỏi';
+
+        }else if($float_xeploai>=3.6 && $float_xeploai<=4) {
+            $string_xeploai='Xuất sắc';
+
+        }else{
+            $string_xeploai='Kém';
+
+        }
+        $check=XepLoai::where('sv_id',$sv_id)
+		->where('hk_id',$hk_id)
+		->where('nh_id',$nh_id)->first();
+        $check?
+        XepLoai::where('sv_id',$sv_id)
+		->where('hk_id',$hk_id)
+		->where('nh_id',$nh_id)
+		->update(['xl_xeploai'=>$string_xeploai,
+        'xl_gpa'=>$float_xeploai,
+        'sv_id'=>$sv_id,
+		'hk_id'=>$hk_id,
+		'nh_id'=>$nh_id
+        ])
+        :
+        XepLoai::where('sv_id',$sv_id)
+		->where('hk_id',$hk_id)
+		->where('nh_id',$nh_id)
+		->create(['xl_xeploai'=>$string_xeploai,
+        'xl_gpa'=>$float_xeploai,
+        'sv_id'=>$sv_id,
+		'hk_id'=>$hk_id,
+		'nh_id'=>$nh_id
+        ]);
+
     }
 }

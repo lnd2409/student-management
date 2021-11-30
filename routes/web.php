@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -47,17 +48,20 @@ Route::middleware(['checkAuth'])->group(function () {//route đăng nhập
             Route::get('/them-giao-vien/{id}', [TeacherController::class,'add'])->name('add');
             Route::get('/xu-ly-them', [TeacherController::class,'handleAdd'])->name('handle.add');
         });
+        Route::get('/nam-hoc', [AdminController::class,'schooYear'])->name('schooYear');
+        Route::post('/thay-doi-nam-hoc', [AdminController::class,'changeSchoolYear'])->name('changeSchoolYear');
     });
 
 Route::group(['middleware' => 'checkRole:sinhvien'], function () {//route sinh viên
 
     Route::get('/phuc-khao', [ReviewController::class,'review'])->name('review');
-    Route::post('/gui-phuc-khao', [ReviewController::class,'reviewStore'])->name('review.store');
+    Route::post('/gui-phuc-khao/{monhocsinhvien}', [ReviewController::class,'reviewStore'])->name('review.store');
 
     Route::get('/tra-cuu', [StudentController::class,'search'])->name('search');
 
 });
 Route::group(['middleware' => 'checkRole:giaovien'], function () {//route giáo viên
+    Route::get('/yeu-cau-phuc-khao', [ReviewController::class,'listReview'])->name('review.list');
     Route::get('/thong-ke', [TeacherController::class,'stat'])->name('stat');
     Route::get('/mon-hoc-hien/{id}', [MonHocController::class,'subjectByTeacher'])->name('subject.by.teacher');
 });
@@ -67,35 +71,5 @@ Route::get('/dang-ky-mon', [MonHocController::class,'registerSubject'])->name('d
 Route::get('/xu-ly-dang-ky-mon/{idMonHoc}', [MonHocController::class,'handleRegister'])->name('xu-ly-dang-ky-mon-hoc');
 Route::get('/danh-sach-sinh-vien-dang-hoc/{idMonHoc}', [MonHocController::class,'getStudentBySubject'])->name('mon-hoc.danh-sach-sinh-vien');
 Route::get('/nhap-diem/{idSinhVien}/{idMonHoc}', [MonHocController::class,'handleScore'])->name('mon-hoc.nhap-diem');
-Route::get('/db', function () {
-    $data = [
-        [
-            'sv_id'=>1,
-            'mh_id'=>1
-        ],
-        [
-            'sv_id'=>2,
-            'mh_id'=>1
-        ],
-        [
-            'sv_id'=>3,
-            'mh_id'=>2
-        ],
-        [
-            'sv_id'=>1,
-            'mh_id'=>2
-        ],
-        [
-            'sv_id'=>2,
-            'mh_id'=>2
-        ],
-        [
-            'sv_id'=>3,
-            'mh_id'=>2
-        ],
-    ];
-
-    DB::table('mon_hoc_sinh_vien')->insert($data);
-});
 
 });

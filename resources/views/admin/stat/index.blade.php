@@ -60,11 +60,12 @@
                                 <th>Lớp</th>
                                 <th>Môn học</th>
                                 <th>Điểm trung bình</th>
+                                <th>GPA</th>
                                 <th>Xếp loại</th>
                                 <th>Học kỳ</th>
                             </tr>
                         </thead>
-                        @if($chitiet->sinh_viens->isNotEmpty())
+                        @if($chitiet!='')
                         <tfoot>
                             <tr>
                                 <th>#</th>
@@ -73,6 +74,7 @@
                                 <th>Lớp</th>
                                 <th>Môn học</th>
                                 <th>Điểm trung bình</th>
+                                <th>GPA</th>
                                 <th>Xếp loại</th>
                                 <th>Học kỳ</th>
                             </tr>
@@ -80,16 +82,17 @@
                         @endif
                         <tbody>
                             @if($chitiet!='')
-                            @foreach($chitiet->sinh_viens as $key=>$item)
+                            @foreach($chitiet as $key=>$item)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$item->sv_ma}}</td>
-                                <td>{{$item->sv_ten}}</td>
-                                <td>{{$item->lop->l_ma}}</td>
-                                <td>{{$chitiet->mh_ten}}</td>
-                                <td>trung bình</td>
-                                <td>Xếp loại</td>
-                                <td>{{$chitiet->hocky->hk_ten??''}} - {{$chitiet->namhoc->nh_ten??''}}</td>
+                                <td>{{$item->sinh_vien->sv_ma}}</td>
+                                <td>{{$item->sinh_vien->sv_ten}}</td>
+                                <td>{{$item->sinh_vien->lop->l_ma}}</td>
+                                <td>{{$item->mon_hoc->mh_ten}}</td>
+                                <td>{{$item->mhsv_diemtong}}</td>
+                                <td>{{$item->sinh_vien->xep_loai_hien_tai($item->mon_hoc->namhoc->nh_id,$item->mon_hoc->hocky->hk_id)->xl_gpa??'0'}}</td>
+                                <td>{{$item->sinh_vien->xep_loai_hien_tai($item->mon_hoc->namhoc->nh_id,$item->mon_hoc->hocky->hk_id)->xl_xeploai??'Chưa có'}}</td>
+                                <td>{{$item->mon_hoc->namhoc->nh_ten??''}} - {{$item->mon_hoc->hocky->hk_ten??''}}</td>
                             </tr>
                             @endforeach
                             @endif

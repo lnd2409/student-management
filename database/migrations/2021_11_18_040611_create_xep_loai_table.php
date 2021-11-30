@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMonHocTable extends Migration
+class CreateXepLoaiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateMonHocTable extends Migration
      */
     public function up()
     {
-        Schema::create('mon_hoc', function (Blueprint $table) {
-            $table->id('mh_id');
-            $table->string('mh_ma');
-            $table->string('mh_ten');
-            $table->integer('mh_tinchi')->default(1)->unsigned();
-            $table->bigInteger('gv_id')->nullable()->unsigned();
-            $table->foreign('gv_id')->references('gv_id')->on('giao_vien');
+        Schema::create('xep_loai', function (Blueprint $table) {
+            $table->id('xl_id');
+            $table->string('xl_xeploai')->default('Chưa có');
+            $table->float('xl_gpa')->default(0)->unsigned();
+            $table->bigInteger('sv_id')->nullable()->unsigned();
+            $table->foreign('sv_id')->references('sv_id')->on('sinh_vien');
             $table->bigInteger('hk_id')->nullable()->unsigned();
             $table->foreign('hk_id')->references('hk_id')->on('hoc_ky');
             $table->bigInteger('nh_id')->nullable()->unsigned();
             $table->foreign('nh_id')->references('nh_id')->on('nam_hoc');
-            $table->timestamps();
         });
     }
 
@@ -35,6 +33,6 @@ class CreateMonHocTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mon_hoc');
+        Schema::dropIfExists('xep_loai');
     }
 }

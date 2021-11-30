@@ -16,6 +16,7 @@ class CreateHocKyTable extends Migration
         Schema::create('hoc_ky', function (Blueprint $table) {
             $table->id('hk_id');
             $table->string('hk_ten');
+            $table->integer('hk_trangthai')->default(0);
             $table->timestamps();
         });
     }

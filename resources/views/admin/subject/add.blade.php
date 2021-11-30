@@ -40,6 +40,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <h2 class="card-inside-title">Tín chỉ</h2>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" value="{{ $monHoc != null ? $monHoc->mh_tinchi : 1 }}" name="mh_tinchi" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">

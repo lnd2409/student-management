@@ -20,27 +20,31 @@
                 <div class="header">
                 </div>
                 <div class="body">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Họ tên</th>
-                                <th>Điểm giữa kỳ</th>
-                                <th>Điểm cuối kỳ</th>
-                                <th>Điểm phúc khảo 1</th>
-                                <th>Điểm phúc khảo 2</th>
-                                <th>Điểm tổng</th>
-                                <th>Điểm chữ</th>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (count($data) > 0)
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>MSSV</th>
+                                    <th>Họ tên</th>
+                                    <th>Điểm giữa kỳ</th>
+                                    <th>Điểm cuối kỳ</th>
+                                    <th>Điểm phúc khảo 1</th>
+                                    <th>Điểm phúc khảo 2</th>
+                                    <th>Điểm tổng</th>
+                                    <th>Điểm chữ</th>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (count($data) > 0)
                                 @foreach ($data as $key => $value)
-
-                                    <tr>
-                                        <form action="{{ route('mon-hoc.nhap-diem', ['idMonHoc'=>$value->mh_id, 'idSinhVien' => $value->sv_id]) }}" method="GET">
+                                <tr>
+                                        <form
+                                            action="{{ route('mon-hoc.nhap-diem', ['idMonHoc'=>$value->mh_id, 'idSinhVien' => $value->sv_id]) }}"
+                                            method="GET">
                                         <td>{{ $key+1 }}</td>
+                                        <td>{{ $value->sv_ma }}</td>
                                         <td>{{ $value->sv_ten }}</td>
                                         <td>
                                             <input type="number" name="mhsv_diem_1" value="{{ $value->mhsv_diem_1 }}">
@@ -49,26 +53,31 @@
                                             <input type="number" name="mhsv_diem_2" value="{{ $value->mhsv_diem_2 }}">
                                         </td>
                                         <td>
-                                            <input type="number" name="mhsv_diem_phuc_khao_1" value="{{ $value->mhsv_diem_phuc_khao_1 }}">
+                                            <input type="number" name="mhsv_diem_phuc_khao_1"
+                                                value="{{ $value->mhsv_diem_phuc_khao_1 }}">
                                         </td>
                                         <td>
-                                            <input type="number" name="mhsv_diem_phuc_khao_2" value="{{ $value->mhsv_diem_phuc_khao_2 }}">
+                                            <input type="number" name="mhsv_diem_phuc_khao_2"
+                                                value="{{ $value->mhsv_diem_phuc_khao_2 }}">
                                         </td>
                                         <td>
-                                            <input type="number" name="mhsv_diemtong" readonly value="{{ $value->mhsv_diemtong }}"></td>
+                                            <input type="number" name="mhsv_diemtong" readonly
+                                                value="{{ $value->mhsv_diemtong }}"></td>
                                         <td>
-                                            <input type="text" name="mhsv_diemchu" readonly value="{{ $value->mhsv_diemchu }}">
+                                            <input type="text" name="mhsv_diemchu" readonly
+                                                value="{{ $value->mhsv_diemchu }}">
                                         </td>
                                         <td>
-                                            <button type="submit" class="btn btn-raised btn-info waves-effect">Xác nhận</button>
+                                            <button type="submit" class="btn btn-raised btn-info waves-effect">Xác
+                                                nhận</button>
                                         </td>
                                     </form>
                                     </tr>
-
                                 @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

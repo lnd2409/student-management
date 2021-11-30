@@ -25,6 +25,7 @@ class NamHoc extends Model
 	protected $primaryKey = 'nh_id';
 
 	protected $fillable = [
-		'nh_ten'
+		'nh_ten',
+		'nh_trangthai',
 	];
 }

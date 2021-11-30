@@ -34,9 +34,10 @@
             </li>
             <li><a href="{{route('admin.student.index')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý sinh viên</span> </a>
             </li>
-            @endif
-            <li><a href="{{route('review')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý điểm</span> </a>
+            <li><a href="{{route('admin.schooYear')}}"><i class="zmdi zmdi-delicious"></i><span>Quản lý năm học</span> </a>
             </li>
+
+            @endif
             @if(Auth::guard('sinhvien')->check())
 
             <li><a href="{{route('review')}}"><i class="zmdi zmdi-delicious"></i><span>Phúc khảo</span> </a></li>
@@ -44,6 +45,7 @@
             </li>
             @endif
             @if(Auth::guard('giaovien')->check())
+            <li><a href="{{route('review.list')}}"><i class="zmdi zmdi-delicious"></i><span>Yêu cầu phúc khảo</span> </a></li>
             <li><a href="{{ route('subject.by.teacher', ['id'=>Auth::guard('giaovien')->id()]) }}"><i class="zmdi zmdi-delicious"></i><span>Danh sách môn học</span> </a></li>
             <li><a href="{{route('stat')}}"><i class="zmdi zmdi-delicious"></i><span>Thống kê</span> </a></li>
             @endif

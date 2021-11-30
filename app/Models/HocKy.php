@@ -25,6 +25,7 @@ class HocKy extends Model
 	protected $primaryKey = 'hk_id';
 
 	protected $fillable = [
-		'hk_ten'
+		'hk_ten',
+		'hk_trangthai',
 	];
 }

@@ -8,6 +8,16 @@
         transition: all 0.4s ease-in-out;
     }
 
+    tr {
+        vertical-align: middle;
+    }
+
+    .pad {
+        height: 50px;
+        align-items: center;
+        display: flex;
+    }
+
 </style>
 @endpush
 @section('content')
@@ -44,24 +54,34 @@
                         <td>{{$key+1}}</td>
                         <td>{{$item->nh_ten}}</td>
                         <td>
+
                             @foreach($sem as $item2)
-                            {{$item2->hk_ten}} 
-                            @if ($item2->hk_trangthai==1 && $item->nh_trangthai==1)
-                                <span style="color: green" ><i class="material-icons">done</i></span>
-                            @endif<br><br><br>
+                            <div class="parrent">
+                                <div class="pad">
+                                    {{$item2->hk_ten}}
+                                    @if ($item2->hk_trangthai==1 && $item->nh_trangthai==1)
+                                    <span style="color: green"><i class="material-icons">done</i></span>
+                                    @endif<br>
+                                </div>
+                            </div>
                             @endforeach
                         </td>
                         <!-- Button trigger modal -->
                         <td>
                             @foreach($sem as $item2)
-                                <form action="{{ route('admin.changeSchoolYear') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="hk_id" value="{{$item2->hk_id}}">
-                                    <input type="hidden" name="nh_id" value="{{$item->nh_id}}">
-                                    <button type="submit" class="btn btn-warning" >Chọn</button>
-                                </form><br> 
-                            @endforeach   
-</td>
+                            <div class="parrent">
+                                <div class="pad">
+
+                                    <form action="{{ route('admin.changeSchoolYear') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="hk_id" value="{{$item2->hk_id}}">
+                                        <input type="hidden" name="nh_id" value="{{$item->nh_id}}">
+                                        <button type="submit" class="btn btn-warning">Chọn</button>
+                                    </form><br>
+                                </div>
+                            </div>
+                            @endforeach
+                        </td>
                     </tr>
                     @endforeach
 

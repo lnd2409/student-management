@@ -36,10 +36,14 @@ class ReviewController extends Controller
 
     public function listReview(Request $request)
     {
-        $list = MonHocSinhVien::where('pk_id', '!=', null)->whereHas('mon_hoc', function ($q) {
+        $namhoc = NamHoc::where('nh_trangthai',1)->first();
+        $hocki = HocKy::where('hk_trangthai',1)->first();
+        $hk = $hocki->hk_id;
+        $nh = $namhoc->nh_id;
+        $list = MonHocSinhVien::where('pk_id', '!=', null)->whereHas('mon_hoc', function ($q) use ($hk,$nh) {
             $q->where('gv_id', Auth::guard('giaovien')->id())
-                ->where('hk_id', 1)
-                ->where('nh_id', 1);
+                ->where('hk_id', $hk)
+                ->where('nh_id', $nh);
         })->get();
         return view('admin.reviews.list', compact('list'));
     }

@@ -41,11 +41,13 @@ class TeacherController extends Controller
 
     public function add($id) {
         $giaoVien = GiaoVien::find($id);
+        $temp =0;
         // dd($lop);
         if ($id == 'add') {
-            return view('admin.teacher.add', compact('giaoVien'));
+            $temp =1;
+            return view('admin.teacher.add', compact('giaoVien','temp'));
         }else {
-            return view('admin.teacher.add', compact('giaoVien'));
+            return view('admin.teacher.add', compact('giaoVien','temp'));
         }
         return "error";
     }

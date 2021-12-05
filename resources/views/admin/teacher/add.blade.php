@@ -3,13 +3,17 @@
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>Thêm môn học</h2>
+                <h2>@if ($temp ==1)
+                    Thêm
+                @else 
+                    Sửa
+                @endif giáo viên</h2>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12">
                 <ul class="breadcrumb float-md-right">
                     <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="#">Môn học</a></li>
-                    <li class="breadcrumb-item active">Thêm môn học</li>
+                    <li class="breadcrumb-item active">Thêm giáo viên</li>
                 </ul>
             </div>
         </div>

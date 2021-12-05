@@ -43,11 +43,13 @@ class StudentController extends Controller
     public function add($id) {
         $lop = Lop::all();
         $sinhVien = SinhVien::find($id);
+        $temp1 = 0;
         // dd($lop);
         if ($id == 'add') {
-            return view('admin.student.add', compact('lop','sinhVien'));
+            $temp1 = 1;
+            return view('admin.student.add', compact('lop','sinhVien', 'temp1'));
         }else {
-            return view('admin.student.add', compact('lop','sinhVien'));
+            return view('admin.student.add', compact('lop','sinhVien', 'temp1'));
         }
         return "error";
     }

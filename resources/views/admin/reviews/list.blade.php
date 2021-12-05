@@ -14,7 +14,7 @@
 <div class="block-header">
     <div class="row">
         <div class="col-lg-7 col-md-6 col-sm-12">
-            <h2>Thông tin cá nhân
+            <h2>Thông tin phúc khảo
             </h2>
         </div>
         <div class="col-lg-5 col-md-6 col-sm-12">

@@ -3,13 +3,13 @@
     <div class="block-header">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h2>Thêm môn học</h2>
+                <h2>Đăng ký môn học</h2>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12">
                 <ul class="breadcrumb float-md-right">
                     <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="#">Môn học</a></li>
-                    <li class="breadcrumb-item active">Tạo danh sách sinh viên</li>
+                    <li class="breadcrumb-item active">Đăng ký môn học</li>
                 </ul>
             </div>
         </div>

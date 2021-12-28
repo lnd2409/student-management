@@ -26,6 +26,12 @@
     {{-- <link  rel="stylesheet" href="assets/css/main.css"> --}}
     {{-- <link rel="stylesheet" href="assets/css/color_skins.css"> --}}
     @include('admin.template.css')
+    <style>
+        .bootstrap-select .bs-searchbox .form-control, .bootstrap-select .bs-actionsbox .form-control, .bootstrap-select .bs-donebutton .form-control
+        {
+            margin-left: 0 !important;
+        }
+    </style>
 </head>
 
 <body class="theme-orange">

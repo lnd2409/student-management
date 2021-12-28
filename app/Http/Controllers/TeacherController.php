@@ -7,20 +7,26 @@ use App\Models\MonHocSinhVien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GiaoVien;
+use App\Models\HocKy;
+use App\Models\NamHoc;
 use Hash;
 class TeacherController extends Controller
 {
     public function stat(Request $request)
     {
+        $namhoc = NamHoc::where('nh_trangthai',1)->first();
+        $hocki = HocKy::where('hk_trangthai',1)->first();
+        $hk = $hocki->hk_id;
+        $nh = $namhoc->nh_id;
         $monhoc=Auth::guard('giaovien')->user()->mon_hocs;
         $chitiet='';
         if($monhoc->isNotEmpty()){
             $request->mh_id??$request->merge(['mh_id'=>$monhoc[0]->mh_id]);
-            $chitiet=MonHocSinhVien::whereHas('mon_hoc', function($q) use ($request){
+            $chitiet=MonHocSinhVien::whereHas('mon_hoc', function($q) use ($request,$nh,$hk){
                 $q->where('gv_id',Auth::guard('giaovien')->id())
                 ->where('mh_id',$request->mh_id)
-                ->where('hk_id',1)
-                ->where('nh_id',1);
+                ->where('hk_id',$hk)
+                ->where('nh_id',$nh);
             })
             ->get();
         }
@@ -35,11 +41,13 @@ class TeacherController extends Controller
 
     public function add($id) {
         $giaoVien = GiaoVien::find($id);
+        $temp =0;
         // dd($lop);
         if ($id == 'add') {
-            return view('admin.teacher.add', compact('giaoVien'));
+            $temp =1;
+            return view('admin.teacher.add', compact('giaoVien','temp'));
         }else {
-            return view('admin.teacher.add', compact('giaoVien'));
+            return view('admin.teacher.add', compact('giaoVien','temp'));
         }
         return "error";
     }
